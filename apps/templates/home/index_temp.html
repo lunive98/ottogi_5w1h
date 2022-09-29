@@ -1,0 +1,407 @@
+<!--
+=========================================================
+* Material Kit 2 - v3.0.0
+=========================================================
+
+* Product Page:  https://www.creative-tim.com/product/material-kit 
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#btn').click(function(){
+   $.ajax({
+    url : '/test2/',
+    data : {name:'name1', age:'27'},
+    success:function(data){
+        $('body').append(data)
+    }
+   });
+  });
+ });
+</script>
+<script>
+// onclick 할때 어떤 구 선택했는지 _ 구, 숫자 > 함수 실행결과를 리스트로   
+  // function read_with_ajax(url,fun,holder){//url,function,just a placeholder
+  // holder=new XMLHttpRequest;
+  // holder.open('GET',url);
+  // holder.onload=fun;
+  // holder.send()
+  // }
+function get_top5(gu){
+    // console.log('click gu')
+    $.ajax({
+      type:'POST',
+      url:'top5/',
+      data:{'gu':gu},
+      dataType:'json',
+      async: false,
+      
+      // 통신 성공
+      success: function(response){
+          $('#top1_pname').text(response['Top_list'][0]['pname']+"("+response['Top_list'][0]['new_label']+")");
+          $('#top2_pname').text(response['Top_list'][1]['pname']+"("+response['Top_list'][1]['new_label']+")");
+          $('#top3_pname').text(response['Top_list'][2]['pname']+"("+response['Top_list'][2]['new_label']+")");
+
+          $('#top1_img').attr('src',response['Top_list'][0]['photo']);
+          $('#top2_img').attr('src',response['Top_list'][1]['photo']);
+          $('#top3_img').attr('src',response['Top_list'][2]['photo']);
+
+          $('#top1_info').text(response['Top_list'][0]['menu']);
+          $('#top2_info').text(response['Top_list'][1]['menu']);
+          $('#top3_info').text(response['Top_list'][2]['menu']);
+
+
+          $('label[for = btncheck4]').text(response['Topic'][0]);
+          $('label[for = btncheck5]').text(response['Topic'][1]);
+          $('label[for = btncheck6]').text(response['Topic'][2]);
+          $('label[for = btncheck7]').text(response['Topic'][3]);
+          $('label[for = btncheck8]').text(response['Topic'][4]);
+          $('label[for = btncheck9]').text(response['Topic'][5]);
+          $('label[for = btncheck10]').text(response['Topic'][6]);
+
+
+        //   $('#top1_pname').text(response['Top_list'][0]['pname']);
+        //   $('#top2_pname').text(response['Top_list'][1]['pname']);
+        //   $('#top3_pname').text(response['Top_list'][2]['pname']);
+
+        //   $('#top1_pname').text(response['Top_list'][0]['pname']);
+        //   $('#top2_pname').text(response['Top_list'][1]['pname']);
+        //   $('#top3_pname').text(response['Top_list'][2]['pname']);
+
+        //   $('#top1_pname').text(response['Top_list'][0]['pname']);
+        //   $('#top2_pname').text(response['Top_list'][1]['pname']);
+        //   $('#top3_pname').text(response['Top_list'][2]['pname']);
+        // }         
+   
+        // (console.log(response);
+        // console.log(response.list[0]);
+      },
+        
+      // 통신 error 
+      error: function(e){
+        console.log('error:' + e.status);
+      }
+    });
+  }
+
+
+  // function test(gu){
+  //   console.log('click me')
+  //   $.ajax({
+  //     type:'POST',
+  //     url:'test_t/',
+  //     data:{'gu':gu},
+  //     dataType:'json',
+      
+  //     // 통신 성공
+  //     success: function(response){
+  //       console.log(response);
+  //       // console.log(response.list[0]);
+  //     },
+        
+  //     // 통신 error 
+  //     error: function(e){
+  //       console.log('error:' + e.status);
+  //     }
+  //   });
+  // }
+
+</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ ASSETS_ROOT }}/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="{{ ASSETS_ROOT }}/img/favicon.png">
+
+  <title>
+    오뚝이 - Presentation | AppSeed
+  </title>
+
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="{{ ASSETS_ROOT }}/fonts/Diary.woff" />
+  <style type="text/css">
+    h3 {font-family: "ONE-Mobile-POP", cursive;}
+    p1 {font-family: "ONE-Mobile-POP", cursive;}
+  </style>
+  <!-- Nucleo Icons -->
+  <link href="{{ ASSETS_ROOT }}/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="{{ ASSETS_ROOT }}/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/material-kit.css?v=3.0.0" rel="stylesheet" />
+
+</head>
+<body class="presentation-page bg-gray-200">
+
+  {% include 'includes/navigation.html' %}
+
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('{{ ASSETS_ROOT }}/img/back.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n3 font size=500px"><p1>오늘의 너는 뚝섬유원지의 벚꽃보다 이뻐</p1></h1>
+            <p1 class="lead text-white mt-3">400만 다운로드를 기록한 실시간 맛집 1위 앱</p1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- 여기서부터 -->
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <!-- <section class="pt-3 pb-4" id="count-stats"> -->
+      <!-- <div class="container"> -->
+        <!-- <div class="row">
+          <div class="col-lg-9 mx-auto py-3">
+            <div class="row">
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary"><span id="state1" countTo="0">0</span></h1>
+                  <h5 class="mt-3"><p1>null</p1></h5>
+                  <p class="text-sm font-weight-normal">null</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary"> <span id="state2" countTo="0">0</span></h1>
+                  <h5 class="mt-3"><p1>null</p1></h5>
+                  <p class="text-sm font-weight-normal">null</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary" id="state3" countTo="0">0</h1>
+                  <h5 class="mt-3"><p1>null</p1></h5>
+                  <p class="text-sm font-weight-normal">null</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      <!-- </div> -->
+    <!-- </section> -->
+    <!-- <section class="my-5 py-5"> -->
+        <div>
+
+        <!-- <div class="my-6 py-6">
+        <div> -->
+        <!-- <div class="col-lg-4 ms-auto"> -->
+          <!-- <div class="seoul_map"> -->
+          <!-- </div> -->
+
+            <img src="../../static/assets/img/seoul_map.gif" usemap="#map" alt="서울시 자치구 지도" style="float:right">
+            <map name="map" id="map">
+              
+              <area shape="rect" coords="283,62,317,77" target="_blank" title="새창으로 열립니다." alt="도봉구" onclick="get_top5(alt)">
+              <area shape="rect" coords="260,92,294,108" target="_blank" title="새창으로 열립니다." alt="강북구" onclick="get_top5(alt)">
+              <area shape="rect" coords="325,80,362,95"  target="_blank" title="새창으로 열립니다." alt="노원구" onclick="get_top5(alt)">
+              <area shape="rect" coords="170,110,206,127" target="_blank" title="새창으로 열립니다." alt="은평구" onclick="get_top5(alt)">
+              <area shape="rect" coords="260,138,298,154" target="_blank" title="새창으로 열립니다." alt="성북구" onclick="get_top5(alt)">
+              <area shape="rect" coords="344,145,382,162" target="_blank" title="새창으로 열립니다." alt="중랑구" onclick="get_top5(alt)">
+              <area shape="rect" coords="171,170,220,187" target="_blank" title="새창으로 열립니다." alt="서대문구" onclick="get_top5(alt)">
+              <area shape="rect" coords="226,162,262,178" target="_blank" title="새창으로 열립니다." alt="종로구" onclick="get_top5(alt)">
+              <area shape="rect" coords="298,163,342,179" target="_blank" title="새창으로 열립니다." alt="동대문구" onclick="get_top5(alt)">
+              <area shape="rect" coords="58,185,92,204" target="_blank" title="새창으로 열립니다." alt="강서구" onclick="get_top5(alt)">
+              <area shape="rect" coords="150,190,190,207" target="_blank" title="새창으로 열립니다." alt="마포구"onclick="get_top5(alt)">
+              <area shape="rect" coords="245,191,272,207" target="_blank" title="새창으로 열립니다." alt="중구"onclick="get_top5(alt)">
+              <area shape="rect" coords="289,199,324,215" target="_blank" title="새창으로 열립니다." alt="성동구" onclick="get_top5(alt)">
+              <area shape="rect" coords="226,226,261,242" target="_blank" title="새창으로 열립니다." alt="용산구" onclick="get_top5(alt)">
+              <area shape="rect" coords="334,211,372,227" target="_blank" title="새창으로 열립니다." alt="광진구" onclick="get_top5(alt)">
+              <area shape="rect" coords="393,201,430,217" target="_blank" title="새창으로 열립니다." alt="강동구" onclick="get_top5(alt)">
+              <area shape="rect" coords="93,239,133,258" target="_blank" title="새창으로 열립니다." alt="양천구" onclick="get_top5(alt)">
+              <area shape="rect" coords="146,237,189,253" target="_blank" title="새창으로 열립니다." alt="영등포구" onclick="get_top5(alt)">
+              <area shape="rect" coords="188,260,226,277" target="_blank" title="새창으로 열립니다." alt="동작구" onclick="get_top5(alt)">
+              <area shape="rect" coords="250,281,290,298" target="_blank" title="새창으로 열립니다." alt="서초구" onclick="get_top5(alt)">
+              <area shape="rect" coords="299,264,336,281" target="_blank" title="새창으로 열립니다." alt="강남구" onclick="get_top5(alt)">
+              <area shape="rect" coords="356,251,393,269" target="_blank" title="새창으로 열립니다." alt="송파구" onclick="get_top5(alt)">
+              <area shape="rect" coords="85,272,122,290" target="_blank" title="새창으로 열립니다." alt="구로구" onclick="get_top5(alt)">
+              <area shape="rect" coords="137,298,175,315" target="_blank" title="새창으로 열립니다." alt="금천구" onclick="get_top5(alt)">
+              <area shape="rect" coords="190,306,226,323" target="_blank" title="새창으로 열립니다." alt="관악구" onclick="get_top5(alt)">
+            </map>
+            <div class="card-body">
+              <img id='top1_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;"> 
+              <h5 id ='top1_pname' class="card-title"></h5>
+              <p id ='top1_info' class="card-text"></p>
+              <a href="/top.html" class="btn btn-primary">상세보기</a>
+            </div>
+            <div class="card-body">
+              <img id='top2_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;">
+              <h5 id ='top2_pname' class="card-title"></h5>
+              <p id ='top2_info' class="card-text"></p>
+              <a href="/top.html" class="btn btn-primary">상세보기</a>
+            </div>
+            <div class="card-body">
+              <img id='top3_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;"> 
+              <h5 id ='top3_pname' class="card-title"></h5>
+              <p id ='top3_info' class="card-text"></p>
+              <a href="/top.html" class="btn btn-primary">상세보기</a>
+            </div>
+            <!-- <button type="button" onclick="test('강남구')">Click Me!</button> -->
+        </div>
+
+        <div class="col-12 mx-auto">
+          <h3>이 지역 추천 태그</h3>
+          <tr>
+            <q>
+              <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="button" class="btn-check" id="btncheck1" autocomplete="off" aria-label="First group">
+                <label class="btn btn-outline-primary" for="btncheck1">이벤트하기 좋은 곳</label>
+              
+                <input type="button" class="btn-check" id="btncheck2" autocomplete="off" aria-label="Second group">
+                <label class="btn btn-outline-primary" for="btncheck2">가족과 함께</label>
+              
+                <input type="button" class="btn-check" id="btncheck3" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck3">혼밥하러 가자</label>
+
+                <input type="button" class="btn-check" id="btncheck4" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck4"></label>
+
+                <input type="button" class="btn-check" id="btncheck5" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck5"></label>
+
+                <input type="button" class="btn-check" id="btncheck6" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck6"></label>
+
+                <input type="button" class="btn-check" id="btncheck7" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck7"></label>
+                
+                <input type="button" class="btn-check" id="btncheck8" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck8"></label>
+
+                <input type="button" class="btn-check" id="btncheck9" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck9"></label>
+
+                <input type="button" class="btn-check" id="btncheck10" autocomplete="off" aria-label="Thrid group">
+                <label class="btn btn-outline-primary" for="btncheck10"></label>
+                </div>
+              </q>
+          </tr>
+        </div>
+        <div class="card-body">
+          <img id='tag1_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;"> 
+          <h5 id ='tag_pname' class="card-title"></h5>
+          <p id ='tag_info' class="card-text"></p>
+          <a href="/top.html" class="btn btn-primary">상세보기</a>
+        </div>
+        <div class="card-body">
+          <img id='tag2_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;">
+          <h5 id ='tag2_pname' class="card-title"></h5>
+          <p id ='tag2_info' class="card-text"></p>
+          <a href="/top.html" class="btn btn-primary">상세보기</a>
+        </div>
+        <div class="card-body">
+          <img id='tag3_img' class = 'card-img-top' alt="그림없음" style="max-width: 15%; height: 10%;"> 
+          <h5 id ='tag3_pname' class="card-title"></h5>
+          <p id ='tag3_info' class="card-text"></p>
+          <a href="/top.html" class="btn btn-primary">상세보기</a>
+        </div>
+<!-- 가게 정보 카드 -->       
+                  <!-- <div class="card" style="width: 20rem;"> -->
+                    <!-- <img src="..." class = 'card-img-top' alt="..."> class = 'card-img-top' -->
+                    <!-- <div class="row align-items-center">
+                      <div class="col-lg-4 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
+                        <div class="rotating-card-container">
+                          <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
+                            <div class="front front-background" style="background-image: url(https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80); background-size: cover;">
+                              <div class="card-body py-7 text-center">
+                                <i class="material-icons text-white text-4xl my-3">touch_app</i>
+                                <h3 class="text-white"><p1>TOP 30</p1><br></h3>
+                                <p class="text-white opacity-8">이 시간 서울의 핫한 맛집 순위를 오뚝이에서 만나보세요</p>
+                              </div>
+                            </div>
+                            <div class="back back-background" style="background-image: url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80); background-size: cover;">
+                              <div class="card-body pt-7 text-center">
+                                <h3 class="text-white"><p1>Top 30</p1></h3>
+                                <p1 class="text-white opacity-8"><br></p1>
+                                <br>
+                                <a href="/top.html" class="btn btn-white btn-sm w-50 mx-auto mt-3"><p1>Click</p1></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>             
+####################3top 30 카드 -->
+                    
+                  
+     
+</div>      
+      <!-- </div> -->
+   
+      <!-- </div> -->
+    <!-- </section> -->
+        <div class="col-12">
+          <div class="text-center">
+            <p class="text-dark my-4 text-sm font-weight-normal">
+              &copy; <a href="https://bit.ly/3fKQZaL" target="_blank">Creative Ottogi</a> - Coded By 5H1W.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--   Core JS Files   -->
+  <script src="{{ ASSETS_ROOT }}/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="{{ ASSETS_ROOT }}/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="{{ ASSETS_ROOT }}/js/plugins/perfect-scrollbar.min.js"></script>
+  <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+  <script src="{{ ASSETS_ROOT }}/js/plugins/countup.min.js"></script>
+  <!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax -->
+  <script src="{{ ASSETS_ROOT }}/js/plugins/rellax.min.js"></script>
+  <!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ -->
+  <script src="{{ ASSETS_ROOT }}/js/plugins/tilt.min.js"></script>
+  <!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices -->
+  <script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+  <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+  <script src="{{ ASSETS_ROOT }}/js/plugins/parallax.min.js"></script>
+  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+  <script src="{{ ASSETS_ROOT }}/js/material-kit.min.js?v=3.0.0" type="text/javascript"></script>
+  <script type="text/javascript">
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+    if (document.getElementById('state2')) {
+      const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+      if (!countUp1.error) {
+        countUp1.start();
+      } else {
+        console.error(countUp1.error);
+      }
+    }
+    if (document.getElementById('state3')) {
+      const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+      if (!countUp2.error) {
+        countUp2.start();
+      } else {
+        console.error(countUp2.error);
+      };
+    }
+  </script>
+</body>
+
+
+
+</html>

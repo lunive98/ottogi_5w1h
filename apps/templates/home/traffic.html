@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% extends "layouts/base.html" %}
+{% block title %} Contact US {% endblock %} 
+{% block body_class %} contact-us {% endblock %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+{% include 'includes/navigation.html' %} 
+{% csrf_token %}
+
+<title>맛집 추천하기!</title>
+</head>
+<body>
+<section>
+  <div class="container">
+    {% for data in df1s %}
+      <tr>          
+        <a href="/top/" class="dropdown-item border-radius-md" class="btn bg-gradient-danger w-auto me-20"><td>{{ data. }}</td></a>
+        <!--
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드2</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드3</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드4</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드5</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드6</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드7</button></a>
+        <a href="/top/" class="dropdown-item border-radius-md">
+        <button type="button" class="btn bg-gradient-danger w-auto me-2">키워드8</button></a>
+        -->
+      </tr>    
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+</body>
+</html>

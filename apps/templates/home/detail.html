@@ -1,0 +1,111 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Contact US {% endblock %} 
+
+{% block body_class %} contact-us {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation.html' %} 
+
+  <section>
+    <div class="page-header min-vh-100 mt-7">
+      <div class="container">
+        <div class="row">
+          <!-- <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+            <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
+                <div class="bg-gradient-primary shadow-primary border-radius-lg p-2 position-absolute" style="top: 5px; left: 22px; width: 80rem;">
+                  <h3 class="text-white text-primary mb-0"><p1>상세 페이지</p1></h3>
+                </div>
+              </div>
+
+              <body>
+              <div class="card-body">
+                <p1 class="pb-3">
+                  <h4></h4>
+                </p1>
+
+                <p1>
+                  {% csrf_token %}
+                  <!-- {{ df1s }} -->
+                  
+                  
+                 <!-- <table>
+                    {% for data in df1s %}
+                    <tr>
+                      <td>{{ data.pid }}</td>
+                      <td>{{ data.topic1 }}</td>
+                      <td>{{ data.topic2 }}</td>
+                    </tr>
+                    {% endfor %}
+                                     -->
+                        <table>
+                  {% for info in infos %}
+                  <tr>
+                    <td>{{ info.pid }}</td>
+                    <td>{{ info.uphpareatitle }}</td>
+                    <td>{{ info.hpareatitle }}</td>
+                    <td>{{ info.hpschcatenm }}</td>
+                    <td>{{ info.mcatenm }}</td>
+                    <td>{{ info.cmt }}</td>
+                    <td>{{ info.addr2 }}</td>
+                    <td>{{ info.score }}</td>
+                    <td><img src = {{ info.photo }} width = '150' height = '150'></td>
+
+                  </tr>
+                  {% endfor %}
+                  
+                  </table>
+                  <!--처음으로-->
+                  <a href="?page=1">처음</a>
+                  <!-- 이전 -->
+                  {% if list.has_previous %}
+                      <a href="?page={{ list.previous_page_number }}">이전</a>
+                  {% else %}
+                      <a>이전</a>
+
+                  {% endif %}
+
+                  <!-- 페이징 -->
+                  {% for page_num in list.paginator.page_range %}
+                      {% if page_num == list.number %}
+                          <b>{{ page_num }}</b>
+
+                      {% else %}
+                          <a href="?page={{ page_num }}">{{ page_num }}</a>
+
+                      {% endif %}
+
+                  {% endfor %}
+
+                  <!-- 다음 -->
+                  {% if list.has_next %}
+                      <a href="?page={{ list.next_page_number }}">다음</a>
+                  {% else %}
+                      <a>다음</a>
+                  {% endif %}
+
+                  <!--끝으로-->
+                  <a href="?page={{ list.paginator.num_pages }}">끝</a>
+                  <br>
+                </p1>
+                <p>{{ test }}</p>
+              </div>
+            </body>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
